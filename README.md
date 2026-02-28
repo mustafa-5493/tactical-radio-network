@@ -35,7 +35,7 @@ Path (2 hops): COMMAND-ALPHA -> RELAY-NORTH -> OBSERVER-BRAVO
 Source: COMMAND-ALPHA | Dest: OBSERVER-BRAVO
 STATUS: SUCCESS. Optimal frequency path established.
 Path (2 hops): COMMAND-ALPHA -> RELAY-SOUTH -> OBSERVER-BRAVO
-
+```
 ##  How to Run
 1. Navigate to the `src` directory.
 2. Compile the engine and simulation modules: `javac engine/*.java simulation/*.java`
