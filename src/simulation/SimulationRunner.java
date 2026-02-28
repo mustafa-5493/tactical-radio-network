@@ -15,7 +15,7 @@ public class SimulationRunner {
         // 2. Create Transceiver Nodes (Callsign, X, Y, Tier)
         TransceiverNode hq = new TransceiverNode("COMMAND-ALPHA", 50, 50, TransceiverNode.TransceiverTier.COMMAND);
         TransceiverNode relay1 = new TransceiverNode("RELAY-NORTH", 150, 100, TransceiverNode.TransceiverTier.RELAY);
-        TransceiverNode relay2 = new TransceiverNode("RELAY-SOUTH", 100, 150, TransceiverNode.TransceiverTier.RELAY);
+        TransceiverNode relay2 = new TransceiverNode("RELAY-SOUTH", 140, 160, TransceiverNode.TransceiverTier.RELAY);
         TransceiverNode forwardObserver = new TransceiverNode("OBSERVER-BRAVO", 220, 150, TransceiverNode.TransceiverTier.STANDARD);
 
         // 3. Deploy nodes to the grid
@@ -29,31 +29,38 @@ public class SimulationRunner {
         System.out.println("[SYSTEM] Calculating signal degradation and establishing topology...");
         manager.establishNetworkTopology();
 
-        // 5. Simulate a transmission using YOUR Dijkstra's algorithm
-        System.out.println("\n--- INITIATING TRANSMISSION ---");
-        System.out.println("Source: " + hq.getCallsign());
-        System.out.println("Destination: " + forwardObserver.getCallsign());
+        // 5. Simulate an initial CLEAR transmission
+        System.out.println("\n--- INITIATING TRANSMISSION (CLEAR AIRWAVES) ---");
+        System.out.println("Source: " + hq.getCallsign() + " | Dest: " + forwardObserver.getCallsign());
+        printRoute(manager.routeTransmission(hq, forwardObserver));
 
-        MyList<TransceiverNode> route = manager.routeTransmission(hq, forwardObserver);
+        // 6. DEPLOY THE JAMMER!
+        // We drop it right on top of RELAY-NORTH (which is at 150, 100)
+        ElectronicWarfare.deployJammer(manager, 145, 105, 20.0);
 
-        // 6. Output the tactical results
-        System.out.println("-------------------------------");
+        // 7. Simulate the transmission again - Dijkstra must recalculate!
+        System.out.println("\n--- RE-INITIATING TRANSMISSION (UNDER EW THREAT) ---");
+        System.out.println("Source: " + hq.getCallsign() + " | Dest: " + forwardObserver.getCallsign());
+        printRoute(manager.routeTransmission(hq, forwardObserver));
+        
+        System.out.println("═══════════════════════════════════════════════════════════");
+    }
+
+    // Extracted printing logic to keep the main method clean
+    private static void printRoute(MyList<TransceiverNode> route) {
         if (route == null || route.size() == 0) {
-            System.out.println("STATUS: FAILED. No viable signal path found. Out of range.");
+            System.out.println("STATUS: FAILED. No viable signal path found. Network isolated.");
         } else {
             System.out.println("STATUS: SUCCESS. Optimal frequency path established.");
-            System.out.println("Hops required: " + (route.size() - 1));
-            
-            System.out.print("Path: ");
+            System.out.print("Path (" + (route.size() - 1) + " hops): ");
             for (int i = 0; i < route.size(); i++) {
-                TransceiverNode n = route.get(i);
-                System.out.print(n.getCallsign());
-                if (i < route.size() - 1) {
-                    System.out.print(" -> ");
-                }
+                System.out.print(route.get(i).getCallsign());
+                if (i < route.size() - 1) System.out.print(" -> ");
             }
             System.out.println();
         }
+    
+
         
         System.out.println("═══════════════════════════════════════════════════════════");
     }
