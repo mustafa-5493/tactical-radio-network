@@ -8,19 +8,19 @@ A highly optimized, graph-based tactical radio network simulation. This project 
 
 
 
-##  Key Features
+## Key Features
 
 * **Dynamic Signal Cost Calculation:** Replaces standard distance-based pathfinding with a Path Loss algorithm. Edge weights are dynamically calculated based on `TransceiverTier` bandwidth allocations and Euclidean distance.
 * **Graph-Based Dijkstra Routing:** Uses a custom `MyPriorityQueue` to achieve $O((E+V) \log V)$ routing efficiency across the airwaves, ignoring physical terrain limitations.
 * **Electronic Warfare (EW) Simulation:** Features real-time fault tolerance. When an EW Jammer is deployed to a coordinate, affected transceiver nodes are neutralized (Signal Cost = `Double.MAX_VALUE`), forcing the network to dynamically recalculate secondary routing paths.
 
-##  Custom Data Structures
+## Custom Data Structures
 This engine runs entirely independent of standard Java collections (`java.util.*`), utilizing bespoke implementations for maximum performance control:
 * `MyPriorityQueue<T>`: Min-heap implementation for Dijkstra state evaluation.
 * `MyHash<K, V>`: Dynamic capacity hash table for topology mapping.
 * `MyList<T>`: Array-backed dynamic list for active node management.
 
-##  Simulation Output Example
+## Simulation Output Example
 ```text
 --- INITIATING TRANSMISSION (CLEAR AIRWAVES) ---
 Source: COMMAND-ALPHA | Dest: OBSERVER-BRAVO
