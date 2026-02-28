@@ -1,10 +1,11 @@
 # Tactical Radio Network Simulation
+*Decoupling physical grid terrain from wireless airwave routing using graph-based pathfinding.*
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Algorithms](https://img.shields.io/badge/Algorithm-Dijkstra-blue?style=for-the-badge)
 ![Data Structures](https://img.shields.io/badge/Data_Structures-Custom-success?style=for-the-badge)
 
-A highly optimized, graph-based tactical radio network simulation. This project demonstrates the decoupling of physical grid terrain from wireless airwave routing, utilizing custom-built data structures (Priority Queues, Hash Maps, Linked Lists) to calculate real-time signal degradation and fault tolerance.
+A highly optimized, graph-based simulation utilizing custom-built data structures (Priority Queues, Hash Maps, Linked Lists) to calculate real-time signal degradation and fault tolerance across adversarial network conditions.
 
 
 
