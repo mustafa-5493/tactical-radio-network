@@ -1,3 +1,4 @@
+package engine;
 public class Mission {
 
     private final int revealRadius;

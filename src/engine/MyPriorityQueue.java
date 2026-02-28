@@ -1,4 +1,6 @@
+package engine;
 import java.util.ArrayList;
+
 
 // Priority Queue class to use in Dijkstra
 
@@ -20,7 +22,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
     public T poll() {
         if (isEmpty()) return null;
 
-        T root = heap.getFirst(); // The smallest element
+        T root = heap.get(0); // The smallest element
         int lastIndex = heap.size() - 1;
         T last = heap.get(lastIndex);
         heap.remove(lastIndex);

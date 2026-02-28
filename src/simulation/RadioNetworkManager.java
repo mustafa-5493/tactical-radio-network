@@ -42,8 +42,9 @@ public class RadioNetworkManager {
     }
 
     // 3. Find the clearest frequency route using your custom Pathfinder
-    public MyList<Node> routeTransmission(TransceiverNode start, TransceiverNode destination) {
-        return pathfinder.findShortestPath(tacticalGrid, start.getX(), start.getY(), destination.getX(), destination.getY());
+    public MyList<TransceiverNode> routeTransmission(TransceiverNode start, TransceiverNode destination) {
+        RadioRouter router = new RadioRouter();
+        return router.findRoute(activeNodes, start, destination);
     }
 
     public Grid getGrid() { return tacticalGrid; }
