@@ -34,7 +34,7 @@ public class SimulationRunner {
         System.out.println("Source: " + hq.getCallsign());
         System.out.println("Destination: " + forwardObserver.getCallsign());
 
-        MyList<Node> route = manager.routeTransmission(hq, forwardObserver);
+        MyList<TransceiverNode> route = manager.routeTransmission(hq, forwardObserver);
 
         // 6. Output the tactical results
         System.out.println("-------------------------------");
@@ -46,16 +46,15 @@ public class SimulationRunner {
             
             System.out.print("Path: ");
             for (int i = 0; i < route.size(); i++) {
-                Node n = route.get(i);
-                // Match grid coordinates back to callsigns for a clean display
-                String callsign = getCallsignAt(manager, n.getX(), n.getY());
-                System.out.print(callsign);
+                TransceiverNode n = route.get(i);
+                System.out.print(n.getCallsign());
                 if (i < route.size() - 1) {
                     System.out.print(" -> ");
                 }
             }
             System.out.println();
         }
+        
         System.out.println("═══════════════════════════════════════════════════════════");
     }
 
